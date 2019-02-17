@@ -2,3 +2,6 @@
 
 Flask-Login==0.4.1
 Flask-WTF==0.14.2
+Flask-SQLAlchemy==2.3.2
+Flask-Migrate==2.4.0
+Flask-Dance[sqla]
