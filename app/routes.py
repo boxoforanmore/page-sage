@@ -1,5 +1,8 @@
-from flask import render_template
-from app import app
+from flask import render_template, session, abort, redirect, url_for
+from app import app, models
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import make_google_blueprint, google
+import requests
 
 
 ####################
@@ -34,7 +37,13 @@ def privacy():
 
 @app.route('/login')
 def login():
-    return render_template('authn/login.html')
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+    account_info = google.get('/oath2/v2/userinfo')
+    if account_info.ok:
+        account_info_json = account_info.json()
+        return redirect(url_for("user"))
+    return render_template('landing/welcome.html')
 
 @app.route('/signup')
 def signup():
@@ -50,6 +59,17 @@ def signup():
 @app.route('/user')
 @app.route('/profile')
 def profile():
+    '''
+    resp_json = google.get("/oauth2/v2/userinfo").json()
+    if resp_json["hd"] != blueprint.authorization_url_params["hd"]:
+        requests.post(
+            "https://accounts.google.com/o/oauth2/revoke",
+            params={"token": token["access_token"]}
+        )
+        session.clear()
+        abort(403)
+    return "You are @{login} on Google".format(login=resp_json["login"])
+    '''
     return render_template('user/profile.html')
 
 ## Book should appear as /user/<book>
