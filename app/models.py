@@ -13,10 +13,17 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(256), unique=True) 
     f_name = db.Column(db.String(30))
 
+    def __repr__(self):
+        return '<User {}>'.format(self.email)
+
 class OAuth(db.Model, OAuthConsumerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship(User)
 
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 '''
 @login_manager.user_loader
 def load_user(user_id):

@@ -1,4 +1,4 @@
-from flask import render_template, session, abort, redirect, url_for
+from flask import render_template, session, abort, redirect, url_for, flash
 from app import app, db
 from app.forms import SearchForm
 from flask_dance.consumer import oauth_authorized
