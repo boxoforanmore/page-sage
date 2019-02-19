@@ -1,10 +1,6 @@
 {% extends "landing/base.html" %}
  
 {% block content %}
-    <h1 id="title"><a href="{{ url_for('index') }}" class="main-scheme">Welcome Page</a></h1>
-    <h4><a href="{{ url_for('about') }}" class="main-scheme">About</a></h4>
-    <h4><a href="{{ url_for('login') }}" class="main-scheme">Log In</a></h4>
-    <h4><a href="{{ url_for('signup') }}" class="main-scheme">Sign Up</a></h4>
-    <h4><a href="{{ url_for('terms') }}" class="main-scheme">Terms of Service</a></h4>
-    <h4><a href="{{ url_for('privacy') }}" class="main-scheme">Privacy</a></h4>
+    <h4><a href="{{ url_for('login') }}">Log In</a></h4>
+    <h4><a href="{{ url_for('signup') }}">Sign Up</a></h4>
 {% endblock %}

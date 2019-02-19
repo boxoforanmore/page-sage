@@ -1,15 +1,36 @@
 #header-bg {
-  background-color: #49271B;
+  background-color: #C0CDAD;
+  /* background-image: radial-gradient(#4A744C, #2B5B2E, #034107) */
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+.container {
+ padding: 0;
 }
 
 .main-scheme {
-  background-color: #D3C6B8;
-  color: #402116;
+  background-color: #FFFFFF;
+  /* background-image: linear-gradient(to bottom right, #CDC0AD, #FAF9F8); */
+  color: #000000;;
 }
  .main-scheme a {
-  color: #402116;
+  color: #000000;
+ }
+
+ .book-section {
+  background-color: #C0CDAD;
+  width: 100% !important;
+  height: 25%;
  }
 
 #sidebar-bg {
-  background-color: #402116;
+  background-color: #C0CDAD;
+  /* background-image: radial-gradient(#5E453F, #3F211A) */
 }

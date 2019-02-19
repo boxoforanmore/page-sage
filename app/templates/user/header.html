@@ -6,88 +6,63 @@
         User Pages
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel='stylesheet' href="{{ url_for('static', filename='./css/user.css') }}">
 </head>
 
 
 <body class="main-scheme">
-    <nav id="header-bg" class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
-        <div class="d-flex justify-content-start">
-            <button type="button" class="bg-transparent border-0 px-3" onclick="toggleSidebar()">
-                <i class="fas fa-bars text-light" style="font-size: 24px"></i>
-            </button>
-            <button class="bg-transparent border-0 px-3">
-                <a href="{{ url_for('profile') }}">
-                    <i class="fas fa-user-astronaut text-light" style="font-size:24px;"></i>
+    <!-- Side Navbar -->
+    <div id="sidebar-bg" class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;">
+        <a href="{{ url_for('my_shelf') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="My Bookshelf">
+            My Shelf
+        </a>
+        <a href="{{ url_for('bookclub') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="A Bookclub">
+            Bookclub
+        </a>
+        <a href="?" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="Add Bookclub">
+            Add Bookclub
+        </a>
+        <a href="?" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="DM's">
+            DM's
+        </a>
+        <a href="{{ url_for('user_settings') }}" class="w3-bar-item w3-button w3-display-bottommiddle bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="My Bookshelf">
+            <i title="User Settings" class="fas fa-cog text-dark"></i>
+        </a>
+    </div>  
+
+    <!-- Main Content  -->
+    <div id="main">
+        <!-- Top Navbar -->
+        <div class="top">
+            <div id="header-bg" class="w3-bar w3-card w3-large">
+                <a class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" onclick="toggleSidebar()" title="Toggle Navigation Menu">
+                    <i class="fas fa-bars"></i>
                 </a>
-            </button>
-            <a class="navbar-brand header-font" href="#" style="font-size:24px;">Username</a>
-        </div>
-        <div class="d-flex justify-content-center text-light" style="font-size:32px;">Page Sage</div>
-        <div class="d-flex justify-content-end">
-            <form class="form-inline mt-2 mt-md-0 pl-3">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search Books" aria-label="Search">
-                <a href="{{ url_for('search') }}">
-                    <button class="btn btn-outline-light my-2 my-sm-0 search-button" type="submit">Search</button>
+                <a href="{{ url_for('profile') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="User Page">
+                    <i class="fas fa-user"></i>
                 </a>
-            </form>
-            <button class="bg-transparent pl-3 border-0">
-                <a href="{{ url_for('index') }}">
-                    <i class="fas fa-sign-out-alt text-light" style="font-size:24px;"></i>
+                <a class="w3-bar-item bg-transparent w3-padding-large w3-large text-dark">Username</a>
+
+                <!-- Right justified  -->
+                <a href="{{ url_for('index') }}" class="w3-bar-item w3-right w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="User Page">
+                    <i class="fas fa-sign-out-alt"></i>
                 </a>
-            </button>
-        </div>
-    </nav>
-        
-    <div class="container-fluid w-100 mt-5" style="height:100vh;">
-        <div class="row w-100" style="height:100vh;">
-            <div id="sidebar-bg" class="col-1 pt-2 shadow text-light">
-                <div class="text-center text-light py-2 border-bottom border-light w-100">
-                    <button class="bg-transparent border-0">
-                        <a href="{{ url_for('my_shelf') }}">
-                            <i title="My Bookshelf" class="fas fa-bookmark text-light" style="font-size: 40px;"></i>
-                        </a>
-                    </button>
-                </div> 
-                <div class="text-center text-light py-2 border-bottom border-light">
-                    <button class="bg-transparent border-0">
-                        <a href="{{ url_for('bookclub') }}">
-                            <i title="A Bookclub" class="fas fa-users text-light" style="font-size: 40px;"></i>
-                        </a>
-                    </button>
-                </div> 
-                <div class="text-center text-light py-2 border-bottom border-light">
-                    <button class="bg-transparent border-0">
-                        <a href="?">
-                            <i title="Add Bookclub" class="fas fa-plus text-light" style="font-size: 40px;"></i>
-                        </a>
-                    </button>
-                </div>
-                <div class="text-center text-light py-2 border-bottom border-light">
-                    <button class="bg-transparent border-0">
-                        <a href="?">
-                            <i title="DM's" class="fas fa-envelope text-light" style="font-size: 40px;"></i>
-                        </a>
-                    </button>
-                </div>
-                <div class="text-center text-light py-2 border-top border-light">
-                    <button class="bg-transparent border-0">
-                        <a href="{{ url_for('user_settings') }}">
-                            <i title="User Settings" class="fas fa-cog text-light" style="font-size: 40px;"></i>
-                        </a>
-                    </button>
+                <div class="w3-bar-item py-2 w3-right">
+                    <form action="{{ url_for('search') }}" method="post" novalidate>
+                        <div class="form-inline">
+                            {{ form.search_item(size=32, id="search", class_="form-control mr-sm-2 bg-light mt-2 mt-md-0 pl-3") }}
+                            {{ form.search(class_="btn btn-outline-dark text-dark my-2 my-sm-0 search-button") }}
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col pt-2 ml-0">
-                {% block content %}
-                {% endblock %}
-            </div> 
+        <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+        <script src="{{ url_for('static', filename='./js/user.js') }}"></script>
         </div>
+        {% block content %}
+        {% endblock %}
     </div>
-
-    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
-    <script src="{{ url_for('static', filename='./js/user.js') }}"></script>
-                
 </body>
 </html>

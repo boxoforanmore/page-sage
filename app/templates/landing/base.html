@@ -4,9 +4,29 @@
         <title>Page Sage</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
         <link rel='stylesheet' href="{{ url_for('static', filename='./css/landing.css') }}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel='stylesheet' href="{{ url_for('static', filename='./css/user.css') }}">
     </head>
     <body class="main-scheme">
+        <!-- Top Navbar -->
+        <div class="top">
+                <div id="header-bg" class="w3-bar w3-card w3-large">
+                    <a href="{{ url_for('terms') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark w3-right" title="Toggle Navigation Menu">
+                        Terms and Services
+                    </a>
+                    <a href="{{ url_for('privacy') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark w3-right" title="Bookclub Page">
+                        Privacy
+                    </a>
+                    <a href="{{ url_for('about') }}" class="w3-bar-item w3-right w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark w3-right" title="Logout">
+                        About
+                    </a>
+                    <a href="{{ url_for('index') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="User Page">
+                        Page Sage
+                    </a>
+                    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+                    <script src="{{ url_for('static', filename='./js/user.js') }}"></script>
+                </div>
+            </div>
         {% block content %}
         {% endblock %}
     </body>

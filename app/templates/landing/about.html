@@ -1,8 +1,8 @@
 {% extends "landing/base.html" %}
 
 {% block content %}
-    <h1 id="title"><a href="{{ url_for('about') }}" class="text-light">About</a></h1>
-    <h4><a href="{{ url_for('index') }}" class="text-light">Home</a></h4>
-    <h4><a href="{{ url_for('login') }}" class="text-light">Log In</a></h4>
-    <h4><a href="{{ url_for('signup') }}" class="text-light">Sign Up</a></h4>
+    <h1 id="title"><a href="{{ url_for('about') }}">About</a></h1>
+    <h4><a href="{{ url_for('index') }}">Home</a></h4>
+    <h4><a href="{{ url_for('login') }}">Log In</a></h4>
+    <h4><a href="{{ url_for('signup') }}">Sign Up</a></h4>
 {% endblock %}

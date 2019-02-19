@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Terms of Service</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <link rel='stylesheet' href="{{ url_for('static', filename='./css/landing.css') }}">
-        <link rel='stylesheet' href="{{ url_for('static', filename='./css/user.css') }}">
-    </head>
-    <body class="main-scheme">
+{% extends "landing/base.html" %}
+
+{% block content %}
         <h2>Page Sage Terms of Service</h2>
 
         <h3>1. Terms</h3>
@@ -48,5 +42,4 @@
         <p>These terms and conditions are governed by and construed in accordance with the laws of Colorado and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
 
         <!-- From getterms.io -->
-    </body>
-</html>
+{% endblock %}
