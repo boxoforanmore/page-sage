@@ -42,7 +42,7 @@ def privacy():
 @app.route('/login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('user'))
+        return redirect(url_for('profile'))
     return render_template('authn/choose-login.html') 
 
 @app.route('/google-login', methods=['GET', 'POST'])
