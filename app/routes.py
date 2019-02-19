@@ -1,7 +1,9 @@
-from flask import render_template
+from flask import render_template, session, abort, redirect, url_for
 from app import app
 from app.forms import SearchForm
-
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import google
+import requests
 
 ####################
 ## Landing Routes ##
@@ -35,7 +37,19 @@ def privacy():
 
 @app.route('/login')
 def login():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+    account_info = google.get('/oath2/v2/userinfo')
+    if account_info.ok:
+        account_info_json = account_info.json()
+        return redirect(url_for('profile'))
+    return render_template('landing/welcome.html')
+
+'''
+@app.route('/login')
+def login():
     return render_template('authn/login.html')
+'''
 
 @app.route('/signup')
 def signup():
