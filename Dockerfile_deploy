@@ -6,4 +6,7 @@ ADD . .
 ENV MODULE_NAME "app"
 ENV VARIABLE_NAME "app"
 
+RUN flask db init
+RUN flask db migrate -m "first migration"
+RUN flask db upgrade
 
