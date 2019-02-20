@@ -56,6 +56,8 @@ def login():
 
 @app.route('/google-login', methods=['GET', 'POST'])
 def google_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
     if not google.authorized:
         return redirect(url_for('google.login'))
     try:
