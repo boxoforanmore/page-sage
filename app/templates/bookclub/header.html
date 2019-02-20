@@ -14,7 +14,7 @@
 
 <body class="main-scheme">
     <!-- Side Navbar -->
-    <div id="sidebar-bg" class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;">
+    <div id="sidebar-bg" class="w3-sidebar w3-bar-block w3-card w3-animate-left sidebar" style="display:block;">
         <a href="{{ url_for('bookclub_shelf') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="Club Shelf">
             Club Shelf
         </a>
@@ -35,6 +35,20 @@
         </a>
     </div>
 
+    <!-- Footer -->
+    <div class="w3-bottom">
+        <div class="w3-bar w3-card w3-center w3-small w3-padding-small w3-grey">
+            <a href="{{ url_for('terms') }}" class="w3-bar-item w3-button bg-transparent w3-padding w3-hover-white text-light w3-right" title="Toggle Navigation Menu">
+                Terms and Services
+            </a>
+            <a href="{{ url_for('privacy') }}" class="w3-bar-item w3-button bg-transparent w3-padding w3-hover-white text-light w3-right" title="Bookclub Page">
+                Privacy
+            </a>
+            <a href="{{ url_for('index') }}" class="w3-bar-item w3-right w3-button bg-transparent w3-padding w3-hover-white text-light w3-right" title="Logout">
+                About
+            </a>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div id="main">

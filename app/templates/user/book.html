@@ -1,7 +1,7 @@
 {% extends "user/header.html" %}
 
 {% block content %}
-    <div class="w3-row-padding w3-padding-64 w3-container w3-light-grey" style="padding: 128px 16px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="w3-row-padding w3-padding-64 w3-container w3-light-grey shadow">
         <div class="w3-content">
             <div class="w3-twothird">
             <h1>A book</h1>
@@ -9,15 +9,15 @@
             </div>
         
             <div class="w3-third w3-center">
-            <img class="w3-image" src="{{ url_for('static', filename='./img/cat.png') }}">
+                <img class="w3-image" alt="derp cat" src="{{ url_for('static', filename='./img/cat.png') }}">
             </div>
         </div>
     </div>
 
     <!-- Second Grid -->
-    <div id="header-bg" class="w3-row-padding w3-padding-64 w3-container">
+    <div id="header-bg" class="w3-row-padding w3-container" style="padding-top: 100px; padding-bottom: 100px;">
         <div class="w3-content">
-            <a class="w3-third w3-center">
+            <div class="w3-third w3-center">
                 <i class="fas fa-pencil-alt w3-padding-64 w3-text-grey w3-margin-right" style="font-size: 100px"></i>
             </div>
         
@@ -27,6 +27,6 @@
             <p class="w3-text-grey">Notes, ratings and other personal info</p>
             </div>
         </div>
-        </div>
+    </div>
 
 {% endblock %}

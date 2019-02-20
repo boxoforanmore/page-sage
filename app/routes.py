@@ -8,6 +8,15 @@ from flask_login import login_required, login_user, logout_user, current_user
 from oauthlib.oauth2.rfc6749.errors import InvalidGrantError, TokenExpiredError, OAuth2Error
 from app.models import User, OAuth
 
+###########
+## Forms ##
+###########
+
+def search_form(form):
+    if form.validate_on_submit():
+        return redirect('/user/search')
+
+
 ####################
 ## Landing Routes ##
 ####################
@@ -112,9 +121,7 @@ def logout():
 @login_required
 def profile():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('user/profile.html', form=form)
 
 ## Book should appear as /user/<book>
@@ -123,18 +130,14 @@ def profile():
 @login_required
 def user_book():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('user/book.html', form=form)
 
 @app.route('/my-shelf', methods=['GET', 'POST'])
 @login_required
 def my_shelf():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('user/my-shelf.html', form=form)
 
 @app.route('/user/search', methods=['GET', 'POST'])
@@ -150,9 +153,7 @@ def search():
 @login_required
 def user_settings():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('user/settings.html', form=form)
 
 
@@ -166,18 +167,14 @@ def user_settings():
 @login_required
 def bookclub():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/club.html', form=form)
 
 @app.route('/bookclub/forums', methods=['GET', 'POST'])
 @login_required
 def forums():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/forums.html', form=form)
 
 ## This should eventually be <bookclub_name>/<forum_name>
@@ -185,27 +182,21 @@ def forums():
 @login_required
 def forum():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/forum.html', form=form)
 
 @app.route('/bookclub/settings', methods=['GET', 'POST'])
 @login_required
 def bookclub_settings():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/settings.html', form=form)
 
 @app.route('/bookclub/search', methods=['GET', 'POST'])
 @login_required
 def bookclub_search():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/search.html', form=form)
 
 @app.route('/bookclub/shelf', methods=['GET', 'POST'])
@@ -213,25 +204,19 @@ def bookclub_search():
 @login_required
 def bookclub_shelf():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/shelf.html', form=form)
 
 @app.route('/bookclub/suggestions', methods=['GET', 'POST'])
 @login_required
 def bookclub_suggestions():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/suggestions.html', form=form)
 
 @app.route('/bookclub/book', methods=['GET', 'POST'])
 @login_required
 def bookclub_book():
     form = SearchForm()
-    if form.validate_on_submit():
-        flash('Search requested for {}'.format(form.search_item.data))
-        return redirect('/user/search')
+    search_form(form)
     return render_template('bookclub/book.html', form=form)

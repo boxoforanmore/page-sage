@@ -30,7 +30,11 @@ body, html {
   height: 25%;
  }
 
-#sidebar-bg {
+ .sidebar {
   background-color: #C0CDAD;
-  /* background-image: radial-gradient(#5E453F, #3F211A) */
+  width: 12%;
+}
+
+#main {
+  margin-left: 12%;
 }
