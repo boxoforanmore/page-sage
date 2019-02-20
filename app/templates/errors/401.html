@@ -1,0 +1,7 @@
+{% extends "landing/base.html" %}
+
+{% block content %}
+    <h1>401 - Login Required to Access Page</h1>
+    <a href="{{ url_for('index') }}"><p>Return to the Welcome Page</p></a>
+    <a href="{{ url_for('login') }}"><p>Login Page</p></a>
+{% endblock %}

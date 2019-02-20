@@ -1,7 +1,12 @@
-from flask import render_template
-from app import app
+from flask import render_template, session, abort, redirect, url_for, flash
+from app import app, db
 from app.forms import SearchForm
-
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import google
+import requests
+from flask_login import login_required, login_user, logout_user, current_user
+from oauthlib.oauth2.rfc6749.errors import InvalidGrantError, TokenExpiredError, OAuth2Error
+from app.models import User, OAuth
 
 ###########
 ## Forms ##
@@ -42,14 +47,70 @@ def privacy():
 ## AuthN Routes ##
 ##################
 
+@app.route('/choose-login')
+@app.route('/login')
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
+    return render_template('authn/choose-login.html') 
+
+@app.route('/google-login', methods=['GET', 'POST'])
+def google_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
+    if not google.authorized:
+        return redirect(url_for('google.login'))
+    try:
+        account_info = google.get('/oauth2/v2/userinfo')
+        with open("cricket.txt", "a+") as jimminy:
+            jimminy.write(str(account_info))
+            if account_info.ok:
+                jimminy.write(str(account_info.json()))
+            jimminy.write(str(account_info.ok))
+            jimminy.write('\n')
+        if account_info.ok:
+            account_info_json = account_info.json()
+            email = account_info_json["email"]
+            f_name = account_info_json["given_name"]
+            user = User.query.filter_by(email=email).first()
+            if user is None:
+                user = User(email=email, f_name=f_name)
+                db.session.add(user)
+                db.session.commit()
+            login_user(user)
+            flash("Signed in with Google")
+            return redirect(url_for('profile'))
+    except (InvalidGrantError, TokenExpiredError) as e:
+        return redirect(url_for("google.login"))
+    return render_template('landing/welcome.html')
+
+'''
+@app.route('/login')
+def login():
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+    account_info = google.get('/oath2/v2/userinfo')
+    if account_info.ok:
+        account_info_json = account_info.json()
+        return redirect(url_for('profile'))
+    return render_template('landing/welcome.html')
+'''
+'''
 @app.route('/login')
 def login():
     return render_template('authn/login.html')
+'''
 
 @app.route('/signup')
 def signup():
     return render_template('authn/signup.html')
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have logged out")
+    return redirect(url_for("index"))
 
 #################
 ## User Routes ##
@@ -59,6 +120,7 @@ def signup():
 ## such that the urls are /<username>/profile, etc.
 @app.route('/user')
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     form = SearchForm()
     search_form(form)
@@ -67,18 +129,21 @@ def profile():
 ## Book should appear as /user/<book>
 ## Should book be moved to a more general page?
 @app.route('/user/book', methods=['GET', 'POST'])
+@login_required
 def user_book():
     form = SearchForm()
     search_form(form)
     return render_template('user/book.html', form=form)
 
 @app.route('/my-shelf', methods=['GET', 'POST'])
+@login_required
 def my_shelf():
     form = SearchForm()
     search_form(form)
     return render_template('user/my-shelf.html', form=form)
 
 @app.route('/user/search', methods=['GET', 'POST'])
+@login_required
 def search():
     form = SearchForm()
     if form.validate_on_submit():
@@ -87,6 +152,7 @@ def search():
     return render_template('user/search.html', form=form)
 
 @app.route('/user/settings', methods=['GET', 'POST'])
+@login_required
 def user_settings():
     form = SearchForm()
     search_form(form)
@@ -100,12 +166,14 @@ def user_settings():
 ## Bookclub routes should eventually be: /bookclub/<club_name>
 @app.route('/bookclub')
 @app.route('/club', methods=['GET', 'POST'])
+@login_required
 def bookclub():
     form = SearchForm()
     search_form(form)
     return render_template('bookclub/club.html', form=form)
 
 @app.route('/bookclub/forums', methods=['GET', 'POST'])
+@login_required
 def forums():
     form = SearchForm()
     search_form(form)
@@ -113,18 +181,21 @@ def forums():
 
 ## This should eventually be <bookclub_name>/<forum_name>
 @app.route('/bookclub/forum', methods=['GET', 'POST'])
+@login_required
 def forum():
     form = SearchForm()
     search_form(form)
     return render_template('bookclub/forum.html', form=form)
 
 @app.route('/bookclub/settings', methods=['GET', 'POST'])
+@login_required
 def bookclub_settings():
     form = SearchForm()
     search_form(form)
     return render_template('bookclub/settings.html', form=form)
 
 @app.route('/bookclub/search', methods=['GET', 'POST'])
+@login_required
 def bookclub_search():
     form = SearchForm()
     search_form(form)
@@ -132,18 +203,21 @@ def bookclub_search():
 
 @app.route('/bookclub/shelf', methods=['GET', 'POST'])
 @app.route('/bookclub/bookshelf')
+@login_required
 def bookclub_shelf():
     form = SearchForm()
     search_form(form)
     return render_template('bookclub/shelf.html', form=form)
 
 @app.route('/bookclub/suggestions', methods=['GET', 'POST'])
+@login_required
 def bookclub_suggestions():
     form = SearchForm()
     search_form(form)
     return render_template('bookclub/suggestions.html', form=form)
 
 @app.route('/bookclub/book', methods=['GET', 'POST'])
+@login_required
 def bookclub_book():
     form = SearchForm()
     search_form(form)
