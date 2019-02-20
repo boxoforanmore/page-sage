@@ -1,5 +1,6 @@
 import os
 import tempfile
+from flask import url_for
 
 import unittest
 
@@ -70,34 +71,37 @@ class BasicRouteTests(unittest.TestCase):
         response = self.app.get('/signup')
         self.assertEqual(response.status_code, 200)
 
-    '''
+    def test_google_login(self):
+        response = self.app.get('/google-login')
+        self.assertEqual(response.status_code, 302)
+
     #################
     ## User Routes ##
     #################
 
     def test_user_page(self):
         response = self.app.get('/user')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_profile_page(self):
         response = self.app.get('/profile')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_user_book(self):
         response = self.app.get('/user/book')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_my_shelf(self):
         response = self.app.get('/my-shelf')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_user_search(self):
         response = self.app.get('/user/search')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_user_settings(self):
         response = self.app.get('user/settings')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
 
     #####################
@@ -106,45 +110,44 @@ class BasicRouteTests(unittest.TestCase):
 
     def test_bookclub(self):
         response = self.app.get('/bookclub')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_club(self):
         response = self.app.get('/club')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_forums(self):
         response = self.app.get('/bookclub/forums')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_forum(self):
         response = self.app.get('/bookclub/forum')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_shelf(self):
         response = self.app.get('/bookclub/shelf')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_bookshelf(self):
         response = self.app.get('/bookclub/bookshelf')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_suggestions(self):
         response = self.app.get('/bookclub/suggestions')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_book(self):
         response = self.app.get('/bookclub/book')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_settings(self):
         response = self.app.get('/bookclub/settings')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     def test_bookclub_search(self):
         response = self.app.get('/bookclub/search')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
-    '''
 
     #################
     ## Error Pages ##
