@@ -12,7 +12,6 @@ function toggleSidebar() {
     }
 }
 
-window.onload = toggleSidebar
 
 function bookSearch() {
     var search = document.getElementById('search').value
