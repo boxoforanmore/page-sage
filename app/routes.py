@@ -62,12 +62,6 @@ def google_login():
         return redirect(url_for('google.login'))
     try:
         account_info = google.get('/oauth2/v2/userinfo')
-        with open("cricket.txt", "a+") as jimminy:
-            jimminy.write(str(account_info))
-            if account_info.ok:
-                jimminy.write(str(account_info.json()))
-            jimminy.write(str(account_info.ok))
-            jimminy.write('\n')
         if account_info.ok:
             account_info_json = account_info.json()
             email = account_info_json["email"]
@@ -83,23 +77,6 @@ def google_login():
     except (InvalidGrantError, TokenExpiredError) as e:
         return redirect(url_for("google.login"))
     return render_template('landing/welcome.html')
-
-'''
-@app.route('/login')
-def login():
-    if not google.authorized:
-        return redirect(url_for("google.login"))
-    account_info = google.get('/oath2/v2/userinfo')
-    if account_info.ok:
-        account_info_json = account_info.json()
-        return redirect(url_for('profile'))
-    return render_template('landing/welcome.html')
-'''
-'''
-@app.route('/login')
-def login():
-    return render_template('authn/login.html')
-'''
 
 @app.route('/signup')
 def signup():
