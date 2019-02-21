@@ -58,7 +58,7 @@
                 <a href="{{ url_for('profile') }}" class="w3-bar-item w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="User Page">
                     <i class="fas fa-user"></i>
                 </a>
-                <a class="w3-bar-item bg-transparent w3-padding-large w3-large text-dark">Username</a>
+                <a class="w3-bar-item bg-transparent w3-padding-large w3-large text-dark">{{ current_user.f_name }}</a>
 
                 <!-- Right justified  -->
                 <a href="{{ url_for('index') }}" class="w3-bar-item w3-right w3-button bg-transparent w3-padding-large w3-hover-white w3-large text-dark" title="User Page">
