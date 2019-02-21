@@ -13,6 +13,6 @@ ENV VARIABLE_NAME "app"
 
 RUN flask db init
 RUN flask db migrate -m "first migration"
-RUN mv migrate.mako ./migrations/script.py.mako  
+#RUN mv migrate.mako ./migrations/script.py.mako  
 
-RUN flask db upgrade
+#RUN flask db upgrade
